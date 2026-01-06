@@ -8,11 +8,11 @@
 int main() {
     bn::core::init();
 
-    bn::backdrop::set_color(bn::color(0, 0, 0));
+    bn::backdrop::set_color(bn::color(31, 0, 0));
 
     auto dot = bn::sprite_items::dot.create_sprite(0, 0);
 
-    bn::fixed speed = 1.5;
+    bn::fixed speed = 5.5;
 
     while(true) {
         if(bn::keypad::left_held()) {
