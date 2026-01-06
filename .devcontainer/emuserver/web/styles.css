@@ -1,0 +1,207 @@
+/* VS Code–style dark theme */
+:root {
+    --bg: #1e1e1e;
+    --bg-elev: #252526;
+    --panel: #2d2d30;
+    --text: #d4d4d4;
+    --muted: #9da3ad;
+    --accent: #569cd6;
+    --accent-2: #4fc1ff;
+    --border: #3c3c3c;
+    --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --focus: 0 0 0 3px rgba(86, 156, 214, .35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(1200px 800px at 20% -10%, #23262b 0%, var(--bg) 40%) fixed;
+    color: var(--text);
+    font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Top bar */
+#top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(6px);
+    background: color-mix(in oklab, var(--bg), transparent 25%);
+    border-bottom: 1px solid var(--border);
+}
+
+#top h1 {
+    margin: 0;
+    padding: 18px clamp(16px, 4vw, 32px);
+    font-size: clamp(20px, 2.6vw, 34px);
+    letter-spacing: .5px;
+    font-weight: 700;
+    background:
+        linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Main card */
+#box {
+    max-width: min(1100px, 92vw);
+    margin: 24px auto 64px;
+    padding: clamp(16px, 3vw, 28px);
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.rom-list-title {
+    font-weight: 700;
+    font-size: clamp(16px, 2.2vw, 20px);
+    margin-bottom: 8px;
+}
+
+.hint {
+    margin: 0 0 16px 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.hint code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #c5e478;
+    /* VS Code-ish string tone */
+}
+
+/* ROM grid */
+#rom-list {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.rom-btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--panel), #26262a);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: transform .06s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 0 0 rgba(0, 0, 0, 0);
+    font-weight: 600;
+    letter-spacing: .15px;
+}
+
+.rom-btn:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in oklab, var(--accent), white 10%);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .25), 0 0 0 1px color-mix(in oklab, var(--accent), transparent 60%);
+}
+
+.rom-btn:active {
+    transform: translateY(0);
+    background: #26262a;
+}
+
+.rom-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--focus);
+    border-color: var(--accent);
+}
+
+/* Display area once a ROM loads */
+#display {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(1200px 800px at 80% 10%, #23262b 0%, var(--bg) 40%) fixed,
+        #0b0b0b;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+}
+
+#game {
+    display: grid;
+    place-items: center;
+    width: min(96vw, 1100px);
+    max-height: 92vh;
+    aspect-ratio: 3 / 2;
+    /* 240x160 = 3:2 */
+    background: #0a0a0a;
+    border: 1px solid #0f0f10;
+    border-radius: 10px;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .02) inset;
+    overflow: hidden;
+}
+
+/* Make the emulator canvas crisp & responsive */
+#game canvas {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Scrollbar (WebKit) */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+/* Light mode fallback */
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #f6f7f9;
+        --bg-elev: #ffffff;
+        --panel: #f3f4f7;
+        --text: #1a1f29;
+        --muted: #5a6679;
+        --accent: #2b67d1;
+        --accent-2: #2799ff;
+        --border: #e6e8ef;
+        --shadow: 0 10px 30px rgba(23, 37, 84, .08);
+        --focus: 0 0 0 3px rgba(39, 153, 255, .25);
+    }
+
+    body {
+        background: radial-gradient(1200px 800px at 20% -10%, #eef1f7 0%, var(--bg) 40%) fixed;
+    }
+
+    #display {
+        background: #f2f4f8;
+    }
+
+    .rom-btn {
+        background: linear-gradient(180deg, var(--panel), #e9ebf2);
+    }
+}
